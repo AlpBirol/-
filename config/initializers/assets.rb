@@ -13,7 +13,3 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 Rails.application.config.assets.precompile += %w( signup.css )
-Rails.application.config.assets.precompile += %w( bootstrap.min.css )
-Rails.application.config.assets.precompile += %w( jquery-3.3.1.slim.min.js )
-Rails.application.config.assets.precompile += %w( popper.min.js )
-Rails.application.config.assets.precompile += %w( rareparrot.gif )

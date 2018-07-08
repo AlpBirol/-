@@ -1,0 +1,28 @@
+<%= form_with(model: drop, local: true) do |form| %>
+  <% if drop.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(drop.errors.count, "error") %> prohibited this drop from being saved:</h2>
+
+      <ul>
+      <% drop.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="col-md-6 mb-3">
+      <%= form.text_field :title, class:"form-control", placeholder:"Title" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.text_area :description, class:"form-control", placeholder:"Description"  %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.file_field :file, class:"btn btn-light" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.submit class:"btn btn-primary btn-lg btn-block" %>
+    </div>
+<% end %>

@@ -1,0 +1,62 @@
+<% if @drop.user.username == "Guest" || @drop.user == current_user || (current_user != nil && current_user.admin?) %>
+<div class="card">
+  <div class="card card-header">
+  Title
+  </div>
+  <%= @drop.title %>
+</div>
+<br>
+<div class="card">
+  <div class="card card-header">
+  Description
+  </div>
+  <%= @drop.description %>
+</div>
+<div class="card">
+  <div class="card card-header">
+  user
+  </div>
+  <%= @drop.user.username %>
+</div>
+<br>
+<% if @drop.file.attached? %>
+<div class="card">
+<div class="card card-header">
+This is a test
+</div>
+<br>
+<div class="container">
+<div class="row">
+<div class="col-2">
+  <div class="card">
+  <div class="card card-header">
+  File
+  </div>
+    <% if @drop.file.content_type[0..4] == "image" %>
+    <%= image_tag @drop.file, width:"128px", height:"auto"%>
+  <% else %>
+    <%= link_to "Download", @drop.file, download: '', class:"btn btn-success" %>
+  <% end %>
+  <p align="center">.txt</p>
+  </div>
+</div>
+<div class="col">
+  <div class="card" style="margin: left;">
+  <div class="card card-header">
+  Info
+  </div>
+  Size:52
+  name:pa
+  upload time:1243124124
+  </div>
+</div>
+</div>
+</div>
+</div>
+<% end %>
+<%= link_to 'Edit', edit_drop_path(@drop), class:"btn btn-warning" %> |
+<%= link_to 'Destroy', @drop, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %> |
+<%= link_to 'Back', drops_path, class:"btn btn-light" %>
+<% else %>
+<h3> Sorry, you can't view this page! </h5>
+<% end %>

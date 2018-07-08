@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alperenbirol</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js' %>
+    <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' %>
+    <%= stylesheet_link_tag    'signup.css' %>
+    <%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' %>
+    <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' %>
+  </head>
+
+  <body>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <%= link_to "@Kappastorm", 'https://www.github.com/kappastorm', class:"navbar-brand"%>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <%= link_to "Home", drops_path, class:"nav-link" %>
+          </li>
+          <% if user_signed_in? %>
+            <li class="nav-item active">
+            <text class="nav-link">Logged in as <strong><%= current_user.username %></strong></text>
+            </li>
+            <li class="nav-item active">
+            <%= link_to 'Edit profile', edit_user_registration_path, class:'nav-link' %>
+            </li>
+            <li class="nav-item active">
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class:'nav-link'  %>
+            </li>
+            <% if current_user.admin?  %>
+              <li class="nav-item active">
+              <%= link_to "Dashboard", rails_admin_path, class:'nav-link'%>
+              </li>
+            <% end %>
+            <% else %>
+              <li class="nav-item active">
+              <%= link_to "Sign up", new_user_registration_path, class:'nav-link'  %>
+              </li>
+              <li class="nav-item active">
+              <%= link_to "Login", new_user_session_path, class:'nav-link'  %>
+              </li>
+          <% end %>
+        </ul>
+        <%= form_tag drops_path, method: :get, class:"form-inline my-2 my-lg-0" do %>
+          <%= text_field_tag :search, params[:search], class:"form-control mr-sm-2", placeholder:"Search" %>
+          <%= submit_tag 'Search', :name => nil, class:"btn btn-outline-success my-2 my-sm-0" %>
+        <% end %>
+      </div>
+    </nav>
+    <div class="container">
+    <br>
+    <br>
+    <br>
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+    <%= yield %>
+    </div>
+  </body>
+</html>

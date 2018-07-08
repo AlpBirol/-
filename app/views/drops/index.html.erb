@@ -1,0 +1,37 @@
+<table>
+  <tr>
+  <% i = 0 %>
+  <% @drops.each do |drop| %>
+        <% if drop.user == current_user || (current_user != nil && current_user.admin?) %>
+        <td><div class="card">
+        <div class="card card-header">
+        <% if drop.file.attached? %>
+          <h6 align="center"><%= drop.file.filename %></h6>
+          </div>
+          <% if drop.file.content_type[0..4] == "image" %>
+            <%= image_tag drop.file, style:"max-height: 64px; width: 64px; margin: auto" %>
+          <% else %>
+            something
+          <% end %>
+        <% else %>
+        <h6 align="center"><%= drop.title %></h6>
+        </div>
+        <% end %>
+        <%= link_to 'Show', drop, class:"btn btn-info" %>
+        <%= link_to 'Edit', edit_drop_path(drop), class:"btn btn-warning" %>
+        <%= link_to 'Destroy', drop, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+        </td>
+        </div>  
+        <% i += 1 %>
+        <% if i == 5 %>
+          </tr>
+          <tr>
+          <% i = 0 %>
+        <% end %>
+        <% end %>
+    <% end %>
+</table>
+
+<br>
+
+<%= link_to 'New Drop', new_drop_path, class:"btn btn-primary" %>
